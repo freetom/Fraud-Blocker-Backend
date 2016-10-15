@@ -22,7 +22,7 @@
         <p><h1>Fraud Blocker</h1> It's an add-on for Firefox.</p>
       </div>
       <br/>
-      <hr/>
+      <hr class="horizontal_line"/>
       <br/>
       <div class="quickstart">
         <p><h1>Quickstart</h1></p>
@@ -35,7 +35,7 @@
         <ol>
       </div>
       <br/>
-      <hr/>
+      <hr class="horizontal_line"/>
       <?php include 'counter.php' ?>
     </div>
     <div class="footer">

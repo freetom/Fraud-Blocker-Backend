@@ -2,8 +2,8 @@
 include './api/include/sqlConnect.php';
 include './api/include/functions.php';
 ?>
-<br/><br/>
-<div style="text-align:center"><b>Stats:</b></div>
+<br/>
+<!--<div style="text-align:center"><b>Stats:</b></div>-->
 <div class="counter"><b class="stat"><?php 
           echo getFraudSitesCount($conn, $blackListTable);
           ?></b> sites blocked</div>

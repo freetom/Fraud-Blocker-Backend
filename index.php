@@ -22,7 +22,7 @@
         <p><h1>Fraud Blocker</h1> It's an add-on for Firefox.</p>
       </div>
       <br/>
-      <hr/>
+      <hr class="horizontal_line"/>
       <br/>
       <ul class="features">
         <li class="feature">
@@ -35,10 +35,8 @@
           It Gives you the possibility to give <b>Fraud-Feedback</b> using the button on toolbar (<img src="images/fraud-200.png" class="icon_fraud" />)
         </li>
       </ul>
+      <hr class="horizontal_line"/>
 
-      <div class="install">
-        Install it from <u><a href="https://addons.mozilla.org/en-US/firefox/addon/fraud-blocker/" target="_blank">HERE!</a></u>
-      </div>
       <?php include 'counter.php' ?>
     </div>
     <div class="footer">

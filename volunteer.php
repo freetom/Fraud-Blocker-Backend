@@ -22,7 +22,7 @@
         <p><h1>Fraud Blocker</h1> It's an add-on for Firefox.</p>
       </div>
       <br/>
-      <hr/>
+      <hr class="horizontal_line"/>
       <br/>
       <form method="POST" action="login.php">
         Username <input type="text" name="username" /><br /><br />
@@ -32,7 +32,7 @@
   	  </form>
       <br /><br />
       If you want to become a Volunteer for Fraud Blocker and help us, please contact <i>tomasbortoli@gmail.com</i>
-      <br /><hr>
+      <br /><hr class="horizontal_line">
       <?php include 'counter.php' ?>
     </div>
     <div class="footer">

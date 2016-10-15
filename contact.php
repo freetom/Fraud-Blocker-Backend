@@ -22,11 +22,11 @@
         <p><h1>Fraud Blocker</h1> It's an add-on for Firefox.</p>
       </div>
       <br/>
-      <hr/>
+      <hr class="horizontal_line"/>
       <br/>
       <h4>For the moment, contact me at tomasbortoli@gmail.com</h4>
       <br/>
-      <hr/>
+      <hr class="horizontal_line"/>
       <?php include 'counter.php' ?>
     </div>
     <div class="footer">
