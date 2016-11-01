@@ -25,7 +25,7 @@
       <div class="quickstart">
         <p><h1>Quickstart</h1></p>
         <ol>
-          <li class="step">To begin, install Fraud Blocker from <a href=<? include './include/getExtensionLink.php' ?> target="_blank">here</a></li>
+          <li class="step">To begin, install Fraud Blocker from <a href=<? print_link(); ?> target="_blank">here</a></li>
           <li class="step">Then you shoud see its icon on the toolbar (<img src="images/fraud-200.png" class="icon_fraud"/>). If you don't see the icon probably you've not installed the plug-in.</li>
           <li class="step">If the installation was successful you're now <b>protected</b> by Fraud Blocker. You can browse the internet normally as before. If you hit a Fraudlent site (that is in our database) the page will show the icon (<img src="images/fraud-200.png" class="icon_fraud"/>) and a message. You can eventually ignore the <b>danger</b> and browse the site normally.</li>
           <li class="step">You will be <b>warned</b> by a toolbar when accessing a site reported as fraudlent by other users but still not confirmed from us.</li>
