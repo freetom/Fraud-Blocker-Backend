@@ -4,9 +4,9 @@ include './api/include/functions.php';
 ?>
 <br/>
 <!--<div style="text-align:center"><b>Stats:</b></div>-->
-<div class="counter"><b class="stat"><?php 
+<a href="black.php" target="_blank"><div class="counter"><b class="stat"><?php 
           echo getFraudSitesCount($conn, $blackListTable);
-          ?></b> sites blocked</div>
+          ?></b> sites blocked</div></a>
 <!--<div class="counter" style="background: #7ff79e;"><b class="stat" id="unblocked"><?php 
           echo getGoodSitesCount($conn, $whiteListTable);
           ?></b> non-Fraudulent</div>-->
