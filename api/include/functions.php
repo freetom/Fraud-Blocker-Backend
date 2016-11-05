@@ -36,9 +36,13 @@ function getFirstNonSuffixDomain($conn,$ns){
 	$gotPoint=false;
 	while($i>0){
 		if($ns[$i]=='.'){
-			if(!$gotPoint)
+			if(!$gotPoint){
 				$gotPoint=true;
-			else if(!isSuffix($conn,substr($ns,$i+1)))
+				//check that the first right part of the ns exist in the PSL
+				if(!isSuffix($conn,substr($ns,$i+1)))
+					return "";
+			}
+			else if(!isSuffix($conn,substr($ns,$i+1)))	//if not a suffix, return
 					return substr($ns,$i+1);
 		}
 		$i--;
