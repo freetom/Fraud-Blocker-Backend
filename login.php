@@ -6,7 +6,7 @@ if(!isset($_POST['username']) || !isset($_POST['password']) )
 include './api/include/sqlConnect.php';
 include './api/include/functions.php';
 
-$res=login($conn,$_POST['username'],$_POST['password']);
+$res=login($conn,$_POST['username'],$_POST['username'].$_POST['password']);
 $res->bind_result($username);
 $res->fetch();
 
