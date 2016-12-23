@@ -22,21 +22,28 @@ $res->bind_result($reports,$ns,$timestamp,$contro_reports);
 
     function correct(i,j){
       var request = new XMLHttpRequest();
+      var param = 'i='+i;
       request.open("POST", "https://"+window.location.hostname+'/management/correct.php', true);
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      request.setRequestHeader("Content-length", param.length);
+      request.setRequestHeader("Connection", "close");
       request.onload = function () {
         var response = request.responseText;
         //if(response.indexOf("ok")==-1){
           //alert("Action failed");
         //}
-        
         remove("elem"+j);
         
       }
-      request.send('i='+i);
+      request.send(param);
     }
     function fraudulent(i,j){
       var request = new XMLHttpRequest();
+      var param = 'i='+i;
       request.open("POST", "https://"+window.location.hostname+'/management/fraudulent.php', true);
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      request.setRequestHeader("Content-length", param.length);
+      request.setRequestHeader("Connection", "close");
       request.onload = function () {
         var response = request.responseText;
         //if(response.indexOf("ok")==-1){
@@ -44,7 +51,7 @@ $res->bind_result($reports,$ns,$timestamp,$contro_reports);
         //}
         remove("elem"+j);
       }
-      request.send('i='+i);
+      request.send(param);
     }
     </script>
   </head>
