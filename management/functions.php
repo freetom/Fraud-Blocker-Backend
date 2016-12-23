@@ -33,6 +33,11 @@ function addBlack($con, $ns, $blackListTable){
   sqlExec($con, 'INSERT INTO '.$blackListTable.'(ns,timestamp) VALUES(?,now())',$ns);
 }
 
+//note that $username is treated as sanitized input because normally it is defined by the php 
+function changePassword($con, $username, $password){
+  sqlExec($con, 'UPDATE users SET password=SHA1(?) WHERE username=\''.$username.'\'',$password);
+}
+
 function sqlExec($conn, $q, $var){
   if(!($stmt=$conn->prepare($q))){
     die('Failed in prepare statement');

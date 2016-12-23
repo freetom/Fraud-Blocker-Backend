@@ -22,7 +22,7 @@ $res->bind_result($reports,$ns,$timestamp,$contro_reports);
 
     function correct(i,j){
       var request = new XMLHttpRequest();
-      request.open("GET", "https://"+window.location.hostname+'/management/correct.php?i='+i, true);
+      request.open("POST", "https://"+window.location.hostname+'/management/correct.php', true);
       request.onload = function () {
         var response = request.responseText;
         //if(response.indexOf("ok")==-1){
@@ -32,12 +32,11 @@ $res->bind_result($reports,$ns,$timestamp,$contro_reports);
         remove("elem"+j);
         
       }
-      
-      request.send();
+      request.send('i='+i);
     }
     function fraudulent(i,j){
       var request = new XMLHttpRequest();
-      request.open("GET", "https://"+window.location.hostname+'/management/fraudulent.php?i='+i, true);
+      request.open("POST", "https://"+window.location.hostname+'/management/fraudulent.php', true);
       request.onload = function () {
         var response = request.responseText;
         //if(response.indexOf("ok")==-1){
@@ -45,12 +44,12 @@ $res->bind_result($reports,$ns,$timestamp,$contro_reports);
         //}
         remove("elem"+j);
       }
-      
-      request.send();
+      request.send('i='+i);
     }
     </script>
   </head>
   <body>
+    <a href="/management/changePassword.php">Change your password</a><br/><br/>
     <table id="reports" style="text-align:center;width:100%;border-collapse: collapse;">
       <tr style="width:100%;">
         <td style="width:16.6%;">name</td><td style="width:16.6%;">Fraudulent reports</td><td style="width:16.6%;">Good reports</td><td style="width:16.6%;">Timestamp</td><td style="width:16.6%;">Move to white</td><td style="width:16.6%;">Move to black</td>

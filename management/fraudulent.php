@@ -5,9 +5,9 @@ include '../api/include/sqlConnect.php';
 include '../api/include/functions.php';
 include './functions.php';
 
-if(!isset($_GET["i"]))
+if(!isset($_POST["i"]))
   die();
 
-fraudulent($conn, $_GET["i"],$reportTable,$blackListTable);
+fraudulent($conn, $_POST["i"],$reportTable,$blackListTable);
 echo 'ok';
 ?>
