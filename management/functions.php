@@ -1,7 +1,7 @@
 <?php
 
-function getReported($conn){
-  $q='SELECT reports,ns,timestamp,contro_reports FROM reported_sites ORDER BY reports DESC LIMIT 100';
+function getReported($conn, $username){
+  $q='select reports,ns as nss,timestamp,contro_reports,(select GROUP_CONCAT(username SEPARATOR \',\') from evaluation where fraudulent=false and ns=nss group by ns) as say_correct,(select GROUP_CONCAT(username SEPARATOR \',\') from evaluation where fraudulent=true and ns=nss group by ns) as say_fraudulent from reported_sites group by ns having (not say_correct like \'%'.$username.'%\' or say_correct IS NULL) and (not say_fraudulent like \'%'.$username.'%\' or say_fraudulent IS NULL) ORDER BY reports,contro_reports DESC LIMIT 100;';
   if(!($stmt=$conn->prepare($q))){
     die('Failed in prepare statement');
   }
@@ -13,11 +13,13 @@ function getReported($conn){
   return $stmt;
 }
 
+//called when a super-user evaluate a site as correct
 function correct($con, $ns, $reportTable, $whiteListTable){
   removeGrey($con, $ns, $reportTable);
   addWhite($con, $ns, $whiteListTable);
 }
 
+//called when a super-user evaluate a site as fraudulent
 function fraudulent($con, $ns, $reportTable, $blackListTable){
   removeGrey($con, $ns, $reportTable);
   addBlack($con, $ns, $blackListTable);
@@ -32,6 +34,16 @@ function addWhite($con, $ns, $whiteListTable){
 function addBlack($con, $ns, $blackListTable){
   sqlExec($con, 'INSERT INTO '.$blackListTable.'(ns,timestamp) VALUES(?,now())',$ns);
 }
+
+//called when a non-super user evaluate a site as fraudulent
+function sayFraudulent($con, $username, $ns, $evaluationTable){
+  sqlExec($con, 'INSERT INTO '.$evaluationTable.'(username,ns,fraudulent) values(\''.$username.'\',?,true)',$ns);
+}
+//called when a non-super user evaluate a site as correct
+function sayCorrect($con, $username, $ns, $evaluationTable){
+  sqlExec($con, 'INSERT INTO '.$evaluationTable.'(username,ns,fraudulent) values(\''.$username.'\',?,false)',$ns);
+}
+
 
 //note that $username is treated as sanitized input because normally it is defined by the php 
 function changePassword($con, $username, $password){

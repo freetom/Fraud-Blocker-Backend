@@ -104,7 +104,7 @@ function query2($conn,$q,$x,$y){
 }
 
 function login($conn,$username,$password){
-	$q='SELECT username FROM users WHERE username=? AND password=SHA1(?)';
+	$q='SELECT username,authorization FROM users WHERE username=? AND password=SHA1(?)';
 	if(!($stmt=$conn->prepare($q))){
 		die('Failed in prepare statement');
 	}

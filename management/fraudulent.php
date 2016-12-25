@@ -8,6 +8,10 @@ include './functions.php';
 if(!isset($_POST["i"]))
   die();
 
-fraudulent($conn, $_POST["i"],$reportTable,$blackListTable);
+if($_SESSION['authorization']==0) //super user
+  fraudulent($conn, $_POST["i"],$reportTable,$blackListTable);
+else //non-super user
+  sayFraudulent($conn, $_SESSION['username'], $_POST["i"], $evaluationTable);
+
 echo 'ok';
 ?>
