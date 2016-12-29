@@ -56,7 +56,7 @@ $res->bind_result($reports,$nss,$timestamp,$contro_reports,$say_correct,$say_fra
     </script>
   </head>
   <body>
-    <a href="/management/changePassword.php">Change your password</a><br/><br/>
+    Welcome, <? echo $_SESSION['username'].' ('; if($_SESSION['authorization']!=0) echo 'non '; ?>super user)<br/><a href="/management/changePassword.php">Change your password</a><br/><br/>
     <table id="reports" style="text-align:center;width:100%;border-collapse: collapse;">
       <tr style="width:100%;">
         <td style="width:12.5%;">name</td><td style="width:12.5%;">Fraudulent reports</td><td style="width:12.5%;">Good reports</td><td style="width:12.5%;">Timestamp</td><td style="width:12.5%;">Say correct</td><td style="width:12.5%;">Say fraudulent</td><td style="width:12.5%;">Move to white</td><td style="width:12.5%;">Move to black</td>

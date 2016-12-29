@@ -29,7 +29,7 @@
         <button>Login</button>
   	  </form>
       <br /><br />
-      If you want to become a Volunteer for Fraud Blocker and help us, please contact <i>tomasbortoli@gmail.com</i>
+      If you want to become a Volunteer for Fraud Blocker and help us reviewing users' reports, please contact <i>tomasbortoli@gmail.com</i>
       <br /><hr class="horizontal_line">
       <?php include './include/counter.php' ?>
     </div>

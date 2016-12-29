@@ -34,6 +34,12 @@
         </li>
       </ul>
       <hr class="horizontal_line"/>
+      <div style="margin-left:5%;margin-right:5%;padding-top:5%;padding-bottom:5%;font-size:1.0em;">
+        Basically is a real-time system that allows people to report or contro-report fraudulent/dishonest/scam/fake/dangerous sites that will be then verified by us and eventually blocked.
+        <br/>
+        Is there a better way to fight scam than a community based system?
+      </div>
+      <hr class="horizontal_line"/>
 
       <? include './include/counter.php' ?>
     </div>
