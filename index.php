@@ -2,6 +2,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+    <meta charset="UTF-8">
     <title>Fraud Blocker add-on</title>
   </head>
   <body>
@@ -22,21 +23,22 @@
       <br/>
       <hr class="horizontal_line"/>
       <br/>
+      <center>Main Features:</center>
       <ul class="features">
         <li class="feature">
-          It <b>Protects</b> you from Fraudlent sites
+          It <b>Blocks requests</b> to sites reputed Fraudlent
         </li>
         <li class="feature">
-          It <b>Warns</b> you when accessing a site reported as Fraudlent by other users (but still not confirmed to be a Fraud)
+          It <b>Warns</b> you when accessing a site reported as Fraudlent by other users (but still not confirmed to be a Fraud). It will give the number of users that reported the site on toolbar (example :<img src="images/fraud-1.png" class="small_icon_fraud" />)
         </li>
         <li class="feature">
-          It Gives you the possibility to give <b>Fraud-Feedback</b> using the button on toolbar (<img src="images/fraud-200.png" class="icon_fraud" />)
+          It allows you to give <b>Fraud-Feedback</b> using the button on toolbar (<img src="images/fraud-200.png" class="icon_fraud" />)
         </li>
       </ul>
       <hr class="horizontal_line"/>
-      <div style="margin-left:5%;margin-right:5%;padding-top:5%;padding-bottom:5%;font-size:1.0em;">
+      <div class="gist">
         Basically is a real-time system that allows people to report or contro-report fraudulent/dishonest/scam/fake/dangerous sites that will be then verified by us and eventually blocked.
-        <br/>
+        <br/><br/>
         Is there a better way to fight scam than a community based system?
       </div>
       <hr class="horizontal_line"/>

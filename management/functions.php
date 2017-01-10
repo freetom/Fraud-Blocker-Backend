@@ -1,7 +1,7 @@
 <?php
 
 function getReported($conn, $username){
-  $q='select reports,ns as nss,timestamp,contro_reports,(select GROUP_CONCAT(username SEPARATOR \',\') from evaluation where fraudulent=false and ns=nss group by ns) as say_correct,(select GROUP_CONCAT(username SEPARATOR \',\') from evaluation where fraudulent=true and ns=nss group by ns) as say_fraudulent from reported_sites group by ns having (not say_correct like \'%'.$username.'%\' or say_correct IS NULL) and (not say_fraudulent like \'%'.$username.'%\' or say_fraudulent IS NULL) ORDER BY reports,contro_reports DESC LIMIT 100;';
+  $q='select reports,ns as nss,timestamp,contro_reports,(select GROUP_CONCAT(username SEPARATOR \',\') from evaluation where fraudulent=false and ns=nss group by ns) as say_correct,(select GROUP_CONCAT(username SEPARATOR \',\') from evaluation where fraudulent=true and ns=nss group by ns) as say_fraudulent from reported_sites group by ns having (not say_correct like \'%'.$username.'%\' or say_correct IS NULL) and (not say_fraudulent like \'%'.$username.'%\' or say_fraudulent IS NULL) ORDER BY timestamp DESC LIMIT 100;';
   if(!($stmt=$conn->prepare($q))){
     die('Failed in prepare statement');
   }
