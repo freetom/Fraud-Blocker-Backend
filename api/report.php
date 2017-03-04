@@ -2,6 +2,10 @@
 //report a ns
 
 include './include/reportCheck.php';
+
+if(gethostbyname($_GET['ns'])==$_GET['ns'])
+  die('error');
+
 include './fetch/reports.php';
 include './include/suffixFilter.php';
 include './include/whiteBlackCheck.php';
