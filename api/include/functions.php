@@ -47,7 +47,7 @@ function getFirstNonSuffixDomain($conn,$ns){
 		}
 		$i--;
 	}
-	if(!isSuffix($conn,$ns))
+	if($gotPoint && !isSuffix($conn,$ns))
 		return $ns;
 	else
 		return "";
