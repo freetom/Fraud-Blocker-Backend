@@ -9,7 +9,7 @@
     <div id="navigation">
       <ul>
           <li><a href="index.php">Home</a></li>
-          <li><a href="https://github.com/freetomas/Fraud-Blocker-multi-browser-extension" target="_blank">Source code</a></li>
+          <li><a href="https://github.com/freetom/Fraud-Blocker-multi-browser-extension" target="_blank">Source code</a></li>
           <li><a href=<? include './include/getExtensionLink.php' ?> target="_blank">Install</a></li>
           <li><a href="quickstart.php">Quickstart</a></li>
           <li id="activelink"><a href="volunteer.php">Volunteer</a></li>
