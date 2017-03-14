@@ -49,9 +49,9 @@ function getFirstNonSuffixDomain($conn,$ns){
 				if(!isSuffix($conn,substr($ns,$i+1)))
 					return "";
 			}
-			else if(!isSuffix($conn,substr($ns,$i+1))){
-				if(checkNsSublease($conn,substr($ns,$i+1)))
-					;
+			else if(!isSuffix($conn,substr($ns,$i+1)) ){
+				if(checkNsSublease($conn,substr($ns,$i+1)) )
+					$i+=0;
 				else
 					return substr($ns,$i+1);
 			}

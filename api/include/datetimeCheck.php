@@ -1,7 +1,7 @@
 <?php
 
 if(!isset($_GET['lastUpdate']))
-	die('error');
+	die('error, no date');
 
 include './include/functions.php';
 

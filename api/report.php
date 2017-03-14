@@ -4,7 +4,7 @@
 include './include/reportCheck.php';
 
 if(gethostbyname($_GET['ns'])==$_GET['ns'])
-  die('error');
+  die('error, failed lookup');
 
 include './fetch/reports.php';
 include './include/suffixFilter.php';

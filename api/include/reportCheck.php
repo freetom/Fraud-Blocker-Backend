@@ -3,7 +3,7 @@
 include './include/functions.php';
 
 if(!isset($_GET['ns']))
-	die('error');
+	die('error, no ns');
 if(!is_valid_domain_name($_GET['ns']))
 	die('invalid dns');
 
