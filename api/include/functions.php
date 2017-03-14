@@ -29,6 +29,13 @@ function isSuffix($conn,$ns){
 		return false;
 }
 
+function checkNsSublease($conn,$ns){
+	$q='SELECT ns as n FROM subleases WHERE ns=?';
+	$res=query($conn,$q,$ns);
+	$res->bind_result($n);
+	$res->fetch();
+	return $n!="";
+}
 //given a domain return the first part of it that is a non-suffix-domain
 //in other words, the first subns that isn't contained in the PSL (public suffixes list)
 function getFirstNonSuffixDomain($conn,$ns){
@@ -42,8 +49,12 @@ function getFirstNonSuffixDomain($conn,$ns){
 				if(!isSuffix($conn,substr($ns,$i+1)))
 					return "";
 			}
-			else if(!isSuffix($conn,substr($ns,$i+1)))	//if not a suffix, return
+			else if(!isSuffix($conn,substr($ns,$i+1))){
+				if(checkNsSublease($conn,substr($ns,$i+1)))
+					;
+				else
 					return substr($ns,$i+1);
+			}
 		}
 		$i--;
 	}

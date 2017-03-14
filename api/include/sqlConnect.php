@@ -9,5 +9,6 @@ $reportTable='reported_sites';
 $blackListTable='black_list_table';
 $whiteListTable='white_list_table';
 $evaluationTable='evaluation';
+$subleasesTable='subleases';
 
 ?>
