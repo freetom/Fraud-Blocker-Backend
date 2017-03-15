@@ -9,24 +9,11 @@ function is_valid_domain_name($ns)
 
 
 function isSuffix($conn,$ns){
-	$q='SELECT ns FROM public_suffix_list WHERE ns=?';
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->bind_param("s",$ns);
-	$stmt->execute();
-	//echo $stmt->fullQuery;
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	$stmt->bind_result($res);
-	$stmt->fetch();
-	
-	if(isset($res))
-		return true;
-	else
-		return false;
+	$q='SELECT ns as n FROM public_suffix_list WHERE ns=?';
+	$res=query($conn,$q,$ns);
+	$res->bind_result($n);
+	$res->fetch();
+	return $n!="";
 }
 
 function checkNsSublease($conn,$ns){
@@ -66,23 +53,27 @@ function getFirstNonSuffixDomain($conn,$ns){
 
 //check if a report for a ns exist
 function existReport($conn,$ns){
-	$q='SELECT ns FROM reported_sites WHERE ns=?';
+	$q='SELECT ns as n FROM reported_sites WHERE ns=?';
+	$res=query($conn,$q,$ns);
+	$res->bind_result($n);
+	$res->fetch();
+	return $n!="";
+}
+
+//query with no additional parameters
+function query_($conn,$q){
 	if(!($stmt=$conn->prepare($q))){
 		die('Failed in prepare statement');
 	}
-	$stmt->bind_param("s",$ns);
 	$stmt->execute();
-	//echo $stmt->fullQuery;
 	$stmt->store_result();
 	if($stmt->error){
 		die($stmt->error);
 	}
-	$stmt->bind_result($res);
-	$stmt->fetch();
-
-	return $res==$ns;
+	return $stmt;
 }
 
+//run query with one additional parameter (string)
 function query($conn,$q,$x){
 	//echo $q.'<br>';
 	if(!($stmt=$conn->prepare($q))){
@@ -98,7 +89,7 @@ function query($conn,$q,$x){
 	return $stmt;
 }
 
-//same as query but with 2 strings as *safe* param in the query
+//same as query but with 2 strings as secure/filtered parameters in the query
 function query2($conn,$q,$x,$y){
 	//echo $q.'<br>';
 	if(!($stmt=$conn->prepare($q))){
@@ -138,57 +129,32 @@ function isValidDateTime($lastUpdate){
 
 function getTimeNormalized(){
 	$time = time();
-	//$check = $time+date("Z",$time);
 	echo strftime("%Y-%m-%d %H:%M:%S", $time);
 }
 
 
 function getFraudSitesCount($conn, $blackListTable){
-	$q='SELECT COUNT(*) as x FROM  '.$blackListTable;
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->execute();
-	//echo $stmt->fullQuery;
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	$stmt->bind_result($x);
-	$stmt->fetch();
-	return $x;
+	$q='SELECT COUNT(*) as n FROM '.$blackListTable;
+	$res=query_($conn,$q);
+	$res->bind_result($n);
+	$res->fetch();
+	return $n;
 }
 
 function getGoodSitesCount($conn, $whiteListTable){
-	$q='SELECT COUNT(*) as x FROM  '.$whiteListTable;
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->execute();
-	//echo $stmt->fullQuery;
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	$stmt->bind_result($x);
-	$stmt->fetch();
-	return $x;
+	$q='SELECT COUNT(*) as n FROM '.$whiteListTable;
+	$res=query_($conn,$q);
+	$res->bind_result($n);
+	$res->fetch();
+	return $n;
 }
 
 function getReportedSitesCount($conn, $reportTable){
-	$q='SELECT COUNT(*) as x FROM  '.$reportTable;
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->execute();
-	//echo $stmt->fullQuery;
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	$stmt->bind_result($x);
-	$stmt->fetch();
-	return $x;
+	$q='SELECT COUNT(*) as n FROM '.$reportTable;
+	$res=query_($conn,$q);
+	$res->bind_result($n);
+	$res->fetch();
+	return $n;
 }
 
 ?>
