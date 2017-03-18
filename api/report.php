@@ -3,7 +3,13 @@
 
 include './include/reportCheck.php';
 
-if(gethostbyname($_GET['ns'])==$_GET['ns'])
+if(filter_var($_GET['ns'], FILTER_VALIDATE_IP)){
+    if( ($realName=gethostbyaddr($_GET['ns'])) == $_GET['ns'] )
+      die('error, failed reverse lookup');
+    else
+      $_GET['ns']=$realName;
+}
+else if(gethostbyname($_GET['ns'])==$_GET['ns'])
   die('error, failed lookup');
 
 include './fetch/reports.php';
