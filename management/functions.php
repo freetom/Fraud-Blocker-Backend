@@ -13,6 +13,23 @@ function getReported($conn, $username){
   return $stmt;
 }
 
+function getUnvalidSubleases($conn){
+  $q='SELECT ns,timestamp FROM subleases WHERE valid=0;';
+  if(!($stmt=$conn->prepare($q))){
+    die('Failed in prepare statement');
+  }
+  $stmt->execute();
+  $stmt->store_result();
+  if($stmt->error){
+    die($statement->error);
+  }
+  return $stmt;
+}
+
+function activateSublease($con,$sub){
+  sqlExec($con,'UPDATE subleases SET valid=1 WHERE ns=?;',$sub);
+}
+
 //called when a super-user evaluate a site as correct
 function correct($con, $ns, $reportTable, $whiteListTable){
   removeGrey($con, $ns, $reportTable);
@@ -45,7 +62,7 @@ function sayCorrect($con, $username, $ns, $evaluationTable){
 }
 
 
-//note that $username is treated as sanitized input because normally it is defined by the php 
+//note that $username is treated as sanitized input because normally it is defined by the php
 function changePassword($con, $username, $password){
   sqlExec($con, 'UPDATE users SET password=SHA1(?) WHERE username=\''.$username.'\'',$password);
 }

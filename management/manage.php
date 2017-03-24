@@ -15,7 +15,7 @@ $res->bind_result($reports,$nss,$timestamp,$contro_reports,$say_correct,$say_fra
 <html>
   <head>
     <script type="text/javascript">
-    
+
     function remove(id) {
       return (elem=document.getElementById(id)).parentNode.removeChild(elem);
     }
@@ -33,7 +33,7 @@ $res->bind_result($reports,$nss,$timestamp,$contro_reports,$say_correct,$say_fra
           //alert("Action failed");
         //}
         remove("elem"+j);
-        
+
       }
       request.send(param);
     }
@@ -53,10 +53,46 @@ $res->bind_result($reports,$nss,$timestamp,$contro_reports,$say_correct,$say_fra
       }
       request.send(param);
     }
+    function activateSublease(i,j){
+      var request = new XMLHttpRequest();
+      var param = 'activate=1&sublease='+i;
+      request.open("POST", "https://"+window.location.hostname+'/management/newSublease.php', true);
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      request.setRequestHeader("Content-length", param.length);
+      request.setRequestHeader("Connection", "close");
+      request.onload = function () {
+        var response = request.responseText;
+        //if(response.indexOf("ok")==-1){
+          //alert(request.responseText);
+        //}
+        document.getElementById("subl"+j).remove();
+      }
+      request.send(param);
+    }
     </script>
   </head>
   <body>
     Welcome, <? echo $_SESSION['username'].' ('; if($_SESSION['authorization']!=0) echo 'non '; ?>super user)<br/><a href="/management/changePassword.php">Change your password</a><br/><br/>
+    Insert domains that let subleases like 'altervista.org': <form method="POST" action="newSublease.php">
+      <input type="text" name="sublease" value="">
+      <input type="submit" value="Submit">
+    </form>
+    <br/>
+    <?php
+      if($_SESSION['authorization']==0){
+        $subl=getUnvalidSubleases($conn);
+        $subl->bind_result($sub,$subt);
+        echo 'SUBLEASES:<table border=1 style="text-align:center;width:100%;border-collapse: collapse;">';
+        $j=0;
+        while($subl->fetch()){
+            echo '<tr id="subl'.$j.'" style="width:100%;"><td style="width:33%;">'.$sub.'</td><td style="width:33%">'.$subt.'</td><td style="width:33%;"><button onclick="activateSublease(\''.$sub.'\','.$j.')"> OK </button></td> </tr>';
+            $j++;
+        }
+        echo '</table>';
+        echo '<hr>';
+      }
+    ?>
+    REPORTS:
     <table id="reports" border="1" style="text-align:center;width:100%;border-collapse: collapse;">
       <tr style="width:100%;">
         <td style="width:12.5%;">name</td><td style="width:12.5%;">Fraudulent reports</td><td style="width:12.5%;">Good reports</td><td style="width:12.5%;">Timestamp</td><td style="width:12.5%;">Say correct</td><td style="width:12.5%;">Say fraudulent</td><td style="width:12.5%;">Move to white</td><td style="width:12.5%;">Move to black</td>
