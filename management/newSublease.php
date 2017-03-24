@@ -15,8 +15,7 @@ if(gethostbyname($ns)==$ns)
 
 //when super user ask for activating sublease
 if(isset($_POST['activate']) && $_POST['activate']=='1' && $_SESSION['authorization']==0){
-  $q='UPDATE '.$subleasesTable.' SET valid=1,timestamp=now() WHERE ns=?';
-  $res=query($conn,$q,$ns);
+  activateSublease($conn,$ns);
   echo 'ok';
 }
 else{ //normal user (always) or super user through the insert interface
