@@ -20,7 +20,9 @@ if(isset($_POST['activate']) && $_POST['activate']=='1' && $_SESSION['authorizat
   echo 'ok';
 }
 else{ //normal user (always) or super user through the insert interface
-  $q='INSERT INTO '.$subleasesTable.'(ns,timestamp,valid) values(?,now(),0)';
+  $validity=0;
+  if($_SESSION['authorization']==0) $validity=1;
+  $q='INSERT INTO '.$subleasesTable.'(ns,timestamp,valid) values(?,now(),'.$validity.')';
   $res=query($conn,$q,$ns);
   header('Location: /management/manage.php');
 }
