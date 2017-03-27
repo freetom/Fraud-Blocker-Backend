@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
@@ -15,7 +16,7 @@
           <li><a href="volunteer.php">Volunteer</a></li>
           <li><a href="contact.php">Contact</a></li>
       </ul>
-    </div> 
+    </div>
     <div class="main">
       <div style="height:25px; width=100%;"></div>
       <img class="logo" src="images/fraud-200.png" width="100px" height="100px"></img>

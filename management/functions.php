@@ -36,27 +36,38 @@ function addBlack($con, $ns, $blackListTable){
 
 //called when a non-super user evaluate a site as fraudulent
 function sayFraudulent($con, $username, $ns, $evaluationTable){
-  sqlExec($con, 'INSERT INTO '.$evaluationTable.'(username,ns,fraudulent) values(\''.$username.'\',?,true)',$ns);
+  sqlExec($con, 'INSERT INTO '.$evaluationTable.'(username,ns,fraudulent) values(?,?,true)',$username,$ns);
 }
 //called when a non-super user evaluate a site as correct
 function sayCorrect($con, $username, $ns, $evaluationTable){
-  sqlExec($con, 'INSERT INTO '.$evaluationTable.'(username,ns,fraudulent) values(\''.$username.'\',?,false)',$ns);
+  sqlExec($con, 'INSERT INTO '.$evaluationTable.'(username,ns,fraudulent) values(?,?,false)',$username,$ns);
 }
 
 
 //note that $username is treated as sanitized input because normally it is defined by the php
 function changePassword($con, $username, $password){
-  sqlExec($con, 'UPDATE users SET password=SHA1(?) WHERE username=\''.$username.'\'',$password);
+  sqlExec($con, 'UPDATE users SET password=SHA1(?) WHERE username=?',$password,$username);
 }
 
 function sqlExec($conn, $q){
   if(!($stmt=$conn->prepare($q))){
     die('Failed in prepare statement');
   }
-  if(count(func_get_args())>=3)
-    $stmt->execute(array_slice(func_get_args(), 2));
-  else
-    $stmt->execute();
+  $len=count(func_get_args());
+  if($len>2){
+    $params=array_slice(func_get_args(), 2);
+    if(($len=count($params))==1)
+      $stmt->bind_param("s",$params[0]);
+    else if($len==2)
+      $stmt->bind_param("ss",$params[0],$params[1]);
+    else if($len==3)
+      $stmt->bind_param("sss",$params[0],$params[1],$params[2]);
+    else if($len==4)
+      $stmt->bind_param("ssss",$params[0],$params[1],$params[2],$params[3]);
+    else
+      die('unsupported');
+  }
+  $stmt->execute();
 
   $stmt->store_result();
   if($stmt->error){
