@@ -9,6 +9,8 @@ if($_POST['password']!=$_POST['password1'])
   fatal('Passwords don\'t match');
 if(strlen($_POST['username'])<6)
   fatal('Username must be at least 6 characters long');
+if(preg_match('/[^a-z_\-0-9]/i', $_POST['username']))
+  fatal('Username can only contains letters, numbers or \'-\' and \'_\'');
 
 include './api/include/sqlConnect.php';
 include './api/include/functions.php';
