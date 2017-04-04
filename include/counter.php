@@ -3,14 +3,10 @@ include './api/include/sqlConnect.php';
 include './api/include/functions.php';
 ?>
 <br/>
-<!--<div style="text-align:center"><b>Stats:</b></div>-->
-<a href="black.php" target="_blank"><div class="counter"><b class="stat"><?php 
-          echo getFraudSitesCount($conn, $blackListTable);
+<a href="black.php" target="_blank"><div class="counter"><b class="stat"><?php
+          echo getRecordsCount($conn, $blackListTable);
           ?></b> sites blocked</div></a>
-<!--<div class="counter" style="background: #7ff79e;"><b class="stat" id="unblocked"><?php 
-          echo getGoodSitesCount($conn, $whiteListTable);
-          ?></b> non-Fraudulent</div>-->
-<div class="counter" style="background: #D8DBE2;"><b class="stat" id="reported"><?php 
-          echo getReportedSitesCount($conn, $reportTable);
+<div class="counter" style="background: #D8DBE2;"><b class="stat" id="reported"><?php
+          echo getRecordsCount($conn, $reportTable);
           ?></b> sites Reported</div>
 <br/><br/>

@@ -7,7 +7,6 @@ function is_valid_domain_name($ns)
           && preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $ns)   ); //length of each label
 }
 
-
 function isSuffix($conn,$ns){
 	$q='SELECT ns as n FROM public_suffix_list WHERE ns=?';
 	$res=query($conn,$q,$ns);
@@ -114,25 +113,8 @@ function getTimeNormalized(){
 	echo strftime("%Y-%m-%d %H:%M:%S", $time);
 }
 
-
-function getFraudSitesCount($conn, $blackListTable){
-	$q='SELECT COUNT(*) as n FROM '.$blackListTable;
-	$res=query($conn,$q);
-	$res->bind_result($n);
-	$res->fetch();
-	return $n;
-}
-
-function getGoodSitesCount($conn, $whiteListTable){
-	$q='SELECT COUNT(*) as n FROM '.$whiteListTable;
-	$res=query($conn,$q);
-	$res->bind_result($n);
-	$res->fetch();
-	return $n;
-}
-
-function getReportedSitesCount($conn, $reportTable){
-	$q='SELECT COUNT(*) as n FROM '.$reportTable;
+function getRecordsCount($conn, $table){
+	$q='SELECT COUNT(*) as n FROM '.$table;
 	$res=query($conn,$q);
 	$res->bind_result($n);
 	$res->fetch();
