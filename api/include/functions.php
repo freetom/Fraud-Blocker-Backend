@@ -60,64 +60,35 @@ function existReport($conn,$ns){
 	return $n!="";
 }
 
-//query with no additional parameters
-function query_($conn,$q){
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->execute();
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	return $stmt;
-}
+function query($conn, $q){
+  if(!($stmt=$conn->prepare($q))){
+    die('Failed in prepare statement');
+  }
+  $len=count(func_get_args());
+  if($len>2){
+    $params=array_slice(func_get_args(), 2);
+    if(($len=count($params))==1)
+      $stmt->bind_param("s",$params[0]);
+    else if($len==2)
+      $stmt->bind_param("ss",$params[0],$params[1]);
+    else if($len==3)
+      $stmt->bind_param("sss",$params[0],$params[1],$params[2]);
+    else if($len==4)
+      $stmt->bind_param("ssss",$params[0],$params[1],$params[2],$params[3]);
+    else
+      die('unsupported');
+  }
+  $stmt->execute();
 
-//run query with one additional parameter (string)
-function query($conn,$q,$x){
-	//echo $q.'<br>';
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->bind_param("s",$x);
-	$stmt->execute();
-	//echo $stmt->fullQuery;
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	return $stmt;
-}
-
-//same as query but with 2 strings as secure/filtered parameters in the query
-function query2($conn,$q,$x,$y){
-	//echo $q.'<br>';
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->bind_param("ss",$x,$y);
-	$stmt->execute();
-	//echo $stmt->fullQuery;
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	return $stmt;
+  $stmt->store_result();
+  if($stmt->error){
+    die($stmt->error);
+  }
+  return $stmt;
 }
 
 function login($conn,$username,$password){
-	$q='SELECT username,authorization FROM users WHERE username=? AND password=SHA1(?)';
-	if(!($stmt=$conn->prepare($q))){
-		die('Failed in prepare statement');
-	}
-	$stmt->bind_param("ss",$username,$password);
-	$stmt->execute();
-	//echo $stmt->fullQuery;
-	$stmt->store_result();
-	if($stmt->error){
-		die($stmt->error);
-	}
-	return $stmt;
+	return query($conn,'SELECT username,authorization FROM users WHERE username=? AND password=SHA1(?)',$username,$password);
 }
 
 function isValidDateTime($lastUpdate){
@@ -135,7 +106,7 @@ function getTimeNormalized(){
 
 function getFraudSitesCount($conn, $blackListTable){
 	$q='SELECT COUNT(*) as n FROM '.$blackListTable;
-	$res=query_($conn,$q);
+	$res=query($conn,$q);
 	$res->bind_result($n);
 	$res->fetch();
 	return $n;
@@ -143,7 +114,7 @@ function getFraudSitesCount($conn, $blackListTable){
 
 function getGoodSitesCount($conn, $whiteListTable){
 	$q='SELECT COUNT(*) as n FROM '.$whiteListTable;
-	$res=query_($conn,$q);
+	$res=query($conn,$q);
 	$res->bind_result($n);
 	$res->fetch();
 	return $n;
@@ -151,7 +122,7 @@ function getGoodSitesCount($conn, $whiteListTable){
 
 function getReportedSitesCount($conn, $reportTable){
 	$q='SELECT COUNT(*) as n FROM '.$reportTable;
-	$res=query_($conn,$q);
+	$res=query($conn,$q);
 	$res->bind_result($n);
 	$res->fetch();
 	return $n;

@@ -5,7 +5,7 @@ if(!isset($ns))
   die();
 
 $q='SELECT (SELECT COUNT(*) FROM '.$blackListTable.' WHERE ns=?) + (SELECT COUNT(*) FROM '.$whiteListTable.' WHERE ns=?) as n';
-$res=query2($conn,$q,$ns,$ns);
+$res=query($conn,$q,$ns,$ns);
 $res->bind_result($n);
 $res->fetch();
 
