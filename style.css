@@ -64,19 +64,19 @@ div#navigation{
     margin-left: 25%;
     width:50%;
     font-size: 1.2em;
-} 
+}
 
 div#navigation ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
-} 
+}
 
  div#navigation li{
     display: inline;
     margin: 0;
     padding:0;
-} 
+}
 
 div#navigation li a{
     text-decoration: none;
@@ -87,26 +87,26 @@ div#navigation li a{
     border-opacity:0.7;
     padding-top: 0.25em;
     padding-left: 0.5em;
-    padding-right: 0.5em;  
-} 
+    padding-right: 0.5em;
+}
 
 div#navigation li a:hover{
     background-color: #f0f0f0;
-} 
+}
 
 div#navigation li#activelink a{
     border-bottom: 1px solid #fff;
     border-radius: 15px 15px 0px 0px;
     background-color: #fff;
     color: #603;
-} 
+}
 
 div#navigation ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
     white-space: nowrap;
-} 
+}
 
 .quickstart{
     margin-right: 5%;

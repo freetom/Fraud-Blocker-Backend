@@ -87,8 +87,19 @@ function query($conn, $q){
   return $stmt;
 }
 
-function login($conn,$username,$password){
-	return query($conn,'SELECT username,authorization FROM users WHERE username=? AND password=SHA1(?)',$username,$password);
+function login($conn,$username,$password,$userTable){
+	return query($conn,'SELECT username,authorization FROM '.$userTable.' WHERE username=? AND password=SHA1(?)',$username,$password);
+}
+
+function register($conn,$username,$password,$userTable){
+  //check that the provided username is not contained and doesn't contain any already existing username
+  $res=query($conn,'select username as x from '.$userTable.' where username LIKE ? OR ? LIKE CONCAT(\'%\',username,\'%\');','%'.$username.'%',$username);
+  $res->bind_result($x);
+  $res->fetch();
+  if(isset($x))
+    return false;
+  query($conn,'INSERT INTO '.$userTable.'(username,password) values(?,SHA1(?))',$username,$password);
+  return true;
 }
 
 function isValidDateTime($lastUpdate){
