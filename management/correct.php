@@ -9,9 +9,9 @@ if(!isset($_POST["i"]))
   die();
 
 if($_SESSION['authorization']==0) //super user
-  correct($conn, $_POST["i"],$reportTable,$whiteListTable);
+  correct($conn, $_POST["i"]);
 else //non-super user
-  sayCorrect($conn, $_SESSION['username'], $_POST["i"], $evaluationTable);
+  sayCorrect($conn, $_SESSION['username'], $_POST["i"]);
 
 echo 'ok';
 ?>

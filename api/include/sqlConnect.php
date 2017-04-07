@@ -11,5 +11,6 @@ $whiteListTable='white_list_table';
 $evaluationTable='evaluation';
 $subleasesTable='subleases';
 $userTable='users';
+$activationTable='activation';
 
 ?>

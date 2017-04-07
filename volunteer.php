@@ -33,6 +33,7 @@
       <br /><hr class="horizontal_line"><br />
       <div style="margin-left:5%;margin-right:5%;">If you want to become a Volunteer for Fraud Blocker and help us reviewing users' reports, please REGISTER:</div>
       <table class="main"><form method="POST" action="register.php">
+        <tr><td>Email</td> <td><input type="text" name="email" /></td></tr>
         <tr><td>Username</td> <td><input type="text" name="username" /></td></tr>
         <tr><td>Password</td> <td><input type="password" name="password" /></td></tr>
         <tr><td>Confirm password</td> <td><input type="password" name="password1" /></td></tr>

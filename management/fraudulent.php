@@ -9,9 +9,9 @@ if(!isset($_POST["i"]))
   die();
 
 if($_SESSION['authorization']==0) //super user
-  fraudulent($conn, $_POST["i"],$reportTable,$blackListTable);
+  fraudulent($conn, $_POST["i"]);
 else //non-super user
-  sayFraudulent($conn, $_SESSION['username'], $_POST["i"], $evaluationTable);
+  sayFraudulent($conn, $_SESSION['username'], $_POST["i"]);
 
 echo 'ok';
 ?>
