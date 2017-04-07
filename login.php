@@ -3,8 +3,7 @@
 if(!isset($_POST['username']) || !isset($_POST['password']) )
   die('Empty username or password');
 
-include './api/include/sqlConnect.php';
-include './api/include/functions.php';
+include './management/functions.php';
 
 $res=login($conn,$_POST['username'],$_POST['username'].$_POST['password']);
 $res->bind_result($username,$authorization,$activated);

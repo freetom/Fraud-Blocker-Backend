@@ -1,5 +1,4 @@
 <?php
-include './api/include/sqlConnect.php';
 include './api/include/functions.php';
 ?>
 <br/>

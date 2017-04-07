@@ -14,8 +14,7 @@ if(preg_match('/[^a-z_\-0-9]/i', $_POST['username']))
 if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
   fatal('Invalid email');
 
-include './api/include/sqlConnect.php';
-include './api/include/functions.php';
+include './management/functions.php';
 
 if(register($conn,$_POST['username'],$_POST['username'].$_POST['password'],$_POST['email']))
   fatal('Registration Succeeded, check you inbox (spam box also) for the activation link!');
