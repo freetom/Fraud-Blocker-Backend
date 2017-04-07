@@ -19,6 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
+## REQUIREMENTS
+This software requires `php5` and a compatible web server, for example `apache2` <br />
+It also uses the `mail` php function that requires to configure `php.ini` properly. By default it should be configured to convey emails to an SMTP server on 127.0.0.1, to run the server, install the `postfix` package and run `service postfix start` on Debian like systems.
 
 ## API
 `/api/` contains the code used to handle clients requests. 
@@ -26,12 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 These roughly are:
 * report/contro-report site
 * avoid-report/avoid-contro-report site
-* download updated from black/gray/white lists
+* download incremental updates from black/gray/white lists
 
 ## Reports Management
 `/management/` contains the (now simple) system that *report's reviewers* shall use to review and judge reported sites.
 
 ## Issues and concerns
-At the moment the system defines good, bad and just reported sites. The problem is that these three categories simply don't fit whatever site is in the net. Hence, at least a new category for sites that may be dangerous (because of user controlled content, like freely uploaded/downloaded executables) should be added to improve awareness of users that are surfing the web. The point is that the plug-in should **protect** users and **increase consciousness** about which kind of site he is surfing.
-
-Ideas and help are appreaciated
+At the moment the system defines good, bad and just reported sites. The problem is that these three categories simply don't fit whatever site is in the net. Hence, at least a new category for sites that may be dangerous (because of user controlled content, like freely uploaded/downloaded executables) should be added to improve awareness of users that are surfing the web. 
