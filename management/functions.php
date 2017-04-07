@@ -3,9 +3,11 @@
 include_once '../api/include/sqlConnect.php';
 include_once '../api/include/functions.php';
 
+//return reported sites except those already evaluated by the current user
+//the logic of the query below implies that no username in the db can be a contained in any other; if a correct behavior is wanted (other functions will preserve this property)
 function getReported($conn, $username){
-  global $evaluationTable;
-  return query($conn,'select reports,ns as nss,timestamp,contro_reports,(select GROUP_CONCAT(username SEPARATOR \',\') from '.$evaluationTable.' where fraudulent=false and ns=nss group by ns) as say_correct,(select GROUP_CONCAT(username SEPARATOR \',\') from evaluation where fraudulent=true and ns=nss group by ns) as say_fraudulent from reported_sites group by ns having (not say_correct like ? or say_correct IS NULL) and (not say_fraudulent like ? or say_fraudulent IS NULL) ORDER BY timestamp DESC LIMIT 100;','%'.$username.'%','%'.$username.'%');
+  global $evaluationTable,$reportTable;
+  return query($conn,'select reports,ns as nss,timestamp,contro_reports,(select GROUP_CONCAT(username SEPARATOR \',\') from '.$evaluationTable.' where fraudulent=false and ns=nss group by ns) as say_correct,(select GROUP_CONCAT(username SEPARATOR \',\') from '.$evaluationTable.' where fraudulent=true and ns=nss group by ns) as say_fraudulent from '.$reportTable.' group by ns having (not say_correct like ? or say_correct IS NULL) and (not say_fraudulent like ? or say_fraudulent IS NULL) ORDER BY timestamp DESC LIMIT 100;','%'.$username.'%','%'.$username.'%');
 }
 
 function getUnvalidSubleases($conn){
@@ -13,6 +15,7 @@ function getUnvalidSubleases($conn){
   return query($conn,'SELECT ns,timestamp FROM '.$subleasesTable.' WHERE valid=0;');
 }
 
+//can only be performed by super-users
 function activateSublease($con,$sub){
   global $subleasesTable;
   query($con,'UPDATE '.$subleasesTable.' SET valid=1 WHERE ns=?;',$sub);

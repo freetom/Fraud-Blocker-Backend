@@ -25,8 +25,10 @@ function checkNsSublease($conn,$ns){
 	$res->fetch();
 	return $n!="";
 }
+
 //given a domain return the first part of it that is a non-suffix-domain
 //in other words, the first subns that isn't contained in the PSL (public suffixes list)
+//also, if resulting ns match a sublease ns, skip and go deeper
 function getFirstNonSuffixDomain($conn,$ns){
 	$i=strlen($ns)-1;
 	$gotPoint=false;
@@ -53,7 +55,7 @@ function getFirstNonSuffixDomain($conn,$ns){
 		return "";
 }
 
-//check if a report for a ns exist
+//check if a report for a ns exists
 function existReport($conn,$ns){
   global $reportTable;
 	$q='SELECT ns as n FROM '.$reportTable.' WHERE ns=?';
