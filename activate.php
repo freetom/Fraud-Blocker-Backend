@@ -5,9 +5,9 @@ if(preg_match('/[^a-z0-9]/', $_GET['code']) || strlen($_GET['code'])!=64)
   die('Not a valid activation code');
 
 include './api/include/sqlConnect.php';
-include './api/include/functions.php';
+include './management/functions.php';
 
-cleanup($conn);
+cleanup($conn); //call to flush expired activation codes and related users
 $res=query($conn,'SELECT username FROM activation WHERE code=?',$_GET['code']);
 $res->bind_result($username);
 $res->fetch();
