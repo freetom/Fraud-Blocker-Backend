@@ -24,7 +24,7 @@
       <br/>
       <hr class="horizontal_line"/>
       <br/>
-      <h4>For the moment, contact me at tomasbortoli@gmail.com</h4>
+      <h4>For the moment, contact me at me@fraudblocker.publicvm.com</h4>
       <br/>
       <hr class="horizontal_line"/>
       <?php include './include/counter.php' ?>
