@@ -77,7 +77,7 @@ $res->bind_result($reports,$nss,$timestamp,$contro_reports,$say_correct,$say_fra
       <input type="text" name="sublease" value="">
       <input type="submit" value="Submit">
     </form>
-    <br/>
+    <br/><br/>
     <?php
       if($_SESSION['authorization']==0){
         $subl=getUnvalidSubleases($conn);
@@ -102,7 +102,7 @@ $res->bind_result($reports,$nss,$timestamp,$contro_reports,$say_correct,$say_fra
 $i=0;
 while($res->fetch()){
   $ns=htmlspecialchars($nss);
-  echo '<tr id="elem'.$i.'">';
+  echo '<tr id="elem'.$i.'" onmouseover="this.style.background=\'gray\';" onmouseout="this.style.background=\'white\';">';
   echo '<td><a href="http://'.$ns.'">'.$ns.' </a></td><td>'.$reports.'</td><td>'.$contro_reports.'</td><td>'.$timestamp.'</td><td>'.$say_correct.'</td><td>'.$say_fraudulent.'</td><td><button style="background-color:#00FF22;" onclick="correct(\''.$ns.'\','.$i.');"> correct </button></td><td><button style="background-color:#FF2200;" onclick="fraudulent(\''.$ns.'\','.$i.');">fraudulent</button></td>';
   $i++;
   echo '</tr>';
