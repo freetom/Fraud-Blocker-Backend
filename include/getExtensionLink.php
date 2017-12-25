@@ -2,21 +2,21 @@
 function is_chrome()
 {
   if(isset($_SERVER['HTTP_USER_AGENT']))
-    return(eregi("chrome", $_SERVER['HTTP_USER_AGENT']));
+    return strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "chrome");
   else
     return false;
 }
 function is_firefox()
 {
   if(isset($_SERVER['HTTP_USER_AGENT']))
-    return(eregi("firefox", $_SERVER['HTTP_USER_AGENT']));
+    return strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "firefox");
   else
     return false;
 }
 function is_edge()
 {
   if(isset($_SERVER['HTTP_USER_AGENT']))
-    return(eregi("edge", $_SERVER['HTTP_USER_AGENT']));
+    return strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "edge");
   else
     return false;
 }
