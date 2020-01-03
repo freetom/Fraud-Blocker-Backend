@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
 ## REQUIREMENTS
-This software requires `php5`, a compatible web server, for example `apache2` or `nginx` and `mysql-server` too. You also need to have `short_open_tag = On` in your `php.ini` configuration file <br/>
+This software requires `php7`, a compatible web server, for example `apache2` or `nginx` and `mysql-server` too. You also need to have `short_open_tag = On` in your `php.ini` configuration file <br/>
 It also uses the `mail` php function that requires to configure `php.ini` properly. By default it should be configured to convey emails to an SMTP server on 127.0.0.1, to run the server, install the `postfix` package and run `service postfix start` on Debian like systems.
 
 ## API
