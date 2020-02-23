@@ -29,7 +29,7 @@ else{
 query($conn,$q,$ns);
 
 //insert the reported URL in the $urlTable
-if(isset($_GET['url']) && $_GET['url'] !== ''){
+if(isset($_GET['url']) && $_GET['url'] !== '' && !existURL($_GET['url'])){
         $q='INSERT INTO '.$urlTable.'(ns,url) VALUES(?,?)';
         query($conn,$q,$ns,$_GET['url']);
 }

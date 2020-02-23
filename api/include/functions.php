@@ -65,6 +65,16 @@ function existReport($conn,$ns){
 	return $n!="";
 }
 
+//check if a report for a url exists
+function existURL($conn,$url){
+  global $reportTable;
+	$q='SELECT ns as n FROM '.$urlTable.' WHERE ns=?';
+	$res=query($conn,$q,$url);
+	$res->bind_result($n);
+	$res->fetch();
+	return $n!="";
+}
+
 function query($conn, $q){
   if(!($stmt=$conn->prepare($q))){
     die('Failed in prepare statement');
