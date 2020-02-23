@@ -6,6 +6,7 @@ if ($conn->connect_error) {
 }
 
 $reportTable='reported_sites';
+$urlTable='reported_urls';
 $blackListTable='black_list_table';
 $whiteListTable='white_list_table';
 $evaluationTable='evaluation';
