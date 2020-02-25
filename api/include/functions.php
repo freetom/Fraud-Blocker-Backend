@@ -67,7 +67,7 @@ function existReport($conn,$ns){
 
 //check if a report for a url exists
 function existURL($conn,$url){
-  global $reportTable;
+  global $urlTable;
 	$q='SELECT ns as n FROM '.$urlTable.' WHERE ns=?';
 	$res=query($conn,$q,$url);
 	$res->bind_result($n);
